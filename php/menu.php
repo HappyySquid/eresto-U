@@ -554,6 +554,9 @@ function testErreurPostCommande(array $erreurs): array {
     if(isset($_POST['cb30'])){
         $nbAccom++;
     }
+    if($nbAccom==0){
+        $erreurs[] = "Le choix d'un accompagnement est obligatoire.";
+    }
     if(!isset($_POST['raddesserts'])){
         $erreurs[] = "Choix de dessert/fromage incorrect."; 
     }
@@ -574,9 +577,6 @@ function testErreurPostCommande(array $erreurs): array {
             $erreurs[] = "Vous avez le droit a maximum cinq serviettes";
         }
     }
-    if($nbAccom==2 && $_POST['radplats']!="radentreesnull"){
-        $portion=0.5;
-    }  
     
     return $erreurs;
 }
@@ -598,7 +598,7 @@ function nbPortionAccom ():int{
     if(isset($_POST['cb30'])){
         $nbAccom++;
     }
-    if($_POST['radplats']!="radentreesnull"){
+    if($_POST['radplats']!="radplatnull"){
         if($nbAccom==1){
             $portion=1;
         }
